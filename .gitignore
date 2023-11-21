@@ -1,41 +1,43 @@
-# Build
-/dist
-/lib
-/lib-types
-/server
-
-# Development
-node_modules
-*.local
-
-# Cache
-.cache
-.mf
-.rollup.cache
-tsconfig.tsbuildinfo
-
-# Logs
-logs
+# Miscellaneous
+*.class
 *.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
-
-# Editor
-.vscode/*
-!.vscode/launch.json
-!.vscode/*.code-snippets
-
-.idea
+*.pyc
+*.swp
 .DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+.atom/
+.buildlog/
+.history
+.svn/
+migrate_working_dir/
 
-# Yarn
-.yarn/*
-!.yarn/releases
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# The .vscode folder contains launch configuration and tasks you configure in
+# VS Code which you may wish to be included in version control, so this line
+# is commented out by default.
+#.vscode/
+
+# Flutter/Dart/Pub related
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+/build/
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Android Studio will place build artifacts here
+/android/app/debug
+/android/app/profile
+/android/app/release
