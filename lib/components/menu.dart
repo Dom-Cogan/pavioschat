@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+
 import '../services/services.dart'; // Import the ChatService interface
 
 class MenuDrawer extends StatelessWidget {
   final ChatService chatService;
   final String userName;
 
-  MenuDrawer({required this.chatService, required this.userName});
+  const MenuDrawer(
+      {super.key, required this.chatService, required this.userName});
 
   @override
   Widget build(BuildContext context) {
@@ -16,14 +18,16 @@ class MenuDrawer extends StatelessWidget {
           Expanded(
             child: FutureBuilder<List<String>>(
               future: chatService.getChatNames(),
-              builder: (BuildContext context, AsyncSnapshot<List<String>> snapshot) {
+              builder:
+                  (BuildContext context, AsyncSnapshot<List<String>> snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 } else if (snapshot.hasError) {
                   return Center(child: Text('Error: ${snapshot.error}'));
                 } else if (snapshot.hasData && snapshot.data!.isEmpty) {
                   // List is empty
-                  return Center(child: Text('No chats, create a new one'));
+                  return const Center(
+                      child: Text('No chats, create a new one'));
                 } else {
                   // Data is fetched successfully, show your ListView
                   return ListView.builder(
@@ -42,7 +46,7 @@ class MenuDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            leading: Icon(Icons.account_circle),
+            leading: const Icon(Icons.account_circle),
             title: Text(userName),
             onTap: () {
               Navigator.pushNamed(context, '/settings');

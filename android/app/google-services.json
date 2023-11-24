@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "67886547475",
+    "project_id": "pavioschat",
+    "storage_bucket": "pavioschat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:67886547475:android:ea60d679a3da22fbdd75e6",
+        "android_client_info": {
+          "package_name": "com.example.pavischat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxHHC1dl3ZxVljwjsUSX4eon6lABXEsCM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
