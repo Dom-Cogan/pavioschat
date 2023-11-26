@@ -1,7 +1,20 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class AuthenticationService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+
+  Future<FirebaseApp> _initializeCustomFirebase(String apiKey, String appId,
+      String messagingSenderId, String projectId) async {
+    final FirebaseOptions customFirebaseOptions = FirebaseOptions(
+      apiKey: apiKey,
+      appId: appId,
+      messagingSenderId: messagingSenderId,
+      projectId: projectId,
+    );
+    return await Firebase.initializeApp(
+        name: 'CustomApp', options: customFirebaseOptions);
+  }
 
   // Get the current user
   User? get currentUser => _firebaseAuth.currentUser;
@@ -13,8 +26,21 @@ class AuthenticationService {
   }
 
   // Sign in with email and password
-  Future<UserCredential> signIn(String email, String password) async {
-    return await _firebaseAuth.signInWithEmailAndPassword(
+  Future<UserCredential> signIn(String email, String password,
+      {bool useCustomDatabase = false,
+      CustomFirebaseCredentials? credentials}) async {
+    FirebaseAuth authInstance = _firebaseAuth;
+
+    if (useCustomDatabase && credentials != null) {
+      FirebaseApp customApp = await _initializeCustomFirebase(
+          credentials.apiKey,
+          credentials.appId,
+          credentials.messagingSenderId,
+          credentials.projectId);
+      authInstance = FirebaseAuth.instanceFor(app: customApp);
+    }
+
+    return await authInstance.signInWithEmailAndPassword(
         email: email, password: password);
   }
 
@@ -41,4 +67,17 @@ class AuthenticationService {
   }
 
 // Additional methods as needed...
+}
+
+class CustomFirebaseCredentials {
+  final String apiKey;
+  final String appId;
+  final String messagingSenderId;
+  final String projectId;
+
+  CustomFirebaseCredentials(
+      {required this.apiKey,
+      required this.appId,
+      required this.messagingSenderId,
+      required this.projectId});
 }

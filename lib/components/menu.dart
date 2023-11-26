@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import '../services/authenticationService.dart'; // Import your authentication service
 import '../services/services.dart'; // Import the ChatService interface
 
 class MenuDrawer extends StatelessWidget {
@@ -45,11 +47,33 @@ class MenuDrawer extends StatelessWidget {
               },
             ),
           ),
-          ListTile(
-            leading: const Icon(Icons.account_circle),
-            title: Text(userName),
-            onTap: () {
-              Navigator.pushNamed(context, '/settings');
+          FutureBuilder<User?>(
+            future: Future.value(AuthenticationService().currentUser),
+            builder: (context, AsyncSnapshot<User?> userSnapshot) {
+              if (userSnapshot.connectionState == ConnectionState.waiting) {
+                return CircularProgressIndicator();
+              } else if (userSnapshot.hasData && userSnapshot.data != null) {
+                User currentUser = userSnapshot.data!;
+                String userName =
+                    currentUser.displayName ?? 'No Name'; // Use displayName
+                return ListTile(
+                  leading: CircleAvatar(child: Text(userName[0])),
+                  title: Text(userName),
+                  trailing:
+                      Icon(Icons.schema_rounded), // Example: Database icon
+                  onTap: () {
+                    // Action on tap
+                  },
+                );
+              } else {
+                return ListTile(
+                  leading: Icon(Icons.settings),
+                  title: Text('Settings'),
+                  onTap: () {
+                    Navigator.pushNamed(context, '/settings');
+                  },
+                );
+              }
             },
           ),
         ],

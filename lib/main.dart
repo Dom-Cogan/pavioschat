@@ -6,6 +6,7 @@ import 'package:pavischat/services/services.dart';
 import './pages/newchat.dart';
 import './services/firebaseService.dart';
 import 'defaultFirebase.dart';
+import 'pages/auth.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,6 +30,7 @@ class MyApp extends StatelessWidget {
             ChatPage(chatService: chatService), // Inject the service
         '/settings': (context) =>
             SettingsPage(), // Define the settings page route
+        '/auth': (context) => AuthPage(), // Define the settings page route
       },
     );
   }

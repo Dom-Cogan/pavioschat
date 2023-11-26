@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-class DefaultFirebaseOptions {
+class CustomFirebaseOptions {
   static final storage = FlutterSecureStorage();
 
   static Future<FirebaseOptions> get currentPlatform async {

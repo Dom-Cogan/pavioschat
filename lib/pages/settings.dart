@@ -54,15 +54,6 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 
-  // Method to handle login or sign out
-  void _handleAuth() {
-    if (useCustomDatabase) {
-      // Logic to sign in with the custom Firebase database
-    } else {
-      // Logic to sign in with the default Firebase database
-    }
-  }
-
   @override
   void initState() {
     super.initState();
@@ -153,7 +144,9 @@ class _SettingsPageState extends State<SettingsPage> {
             padding:
                 const EdgeInsets.symmetric(horizontal: 16.0, vertical: 50.0),
             child: ElevatedButton(
-              onPressed: _handleAuth,
+              onPressed: () {
+                Navigator.pushNamed(context, '/auth');
+              },
               style: ElevatedButton.styleFrom(
                 elevation: 0,
                 backgroundColor: Colors.grey,
